@@ -15,3 +15,9 @@ export async function POST(req) {
         return NextResponse.json({ error: "Failed to add document " + error });
     }
 }
+
+export async function GET() {
+    const snapshot = await getDocs(collection(firestore, "cartas"));
+    const data = snapshot.docs.map((doc) => ({ ...doc.data() }));
+    return NextResponse.json(data);
+}
